@@ -69,6 +69,28 @@ class DatabaseHandler(context: Context) :
         return result
     }
 
+    // Function to update record
+    fun updateHappyPlace(happyPlace: HappyPlaceModel): Int {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_TITLE, happyPlace.title)
+        contentValues.put(KEY_IMAGE, happyPlace.image)
+        contentValues.put(KEY_DESCRIPTION, happyPlace.description)
+        contentValues.put(KEY_DATE, happyPlace.date)
+        contentValues.put(KEY_LOCATION, happyPlace.location)
+        contentValues.put(KEY_LATITUDE, happyPlace.latitude)
+        contentValues.put(KEY_LONGITUDE, happyPlace.longitude)
+
+        // Updating Row
+        val success =
+            db.update(TABLE_HAPPY_PLACE, contentValues, KEY_ID + "=" + happyPlace.id, null)
+        //2nd argument is String containing nullColumnHack
+
+        db.close()
+        return success
+    }
+
+
     // Function to read all the list of Happy Places data which are inserted
     fun getHappyPlacesList(): ArrayList<HappyPlaceModel> {
 
