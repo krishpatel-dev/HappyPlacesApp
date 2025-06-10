@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.krishhh.happyplaces.activities.AddHappyPlaceActivity
 import com.krishhh.happyplaces.activities.MainActivity
+import com.krishhh.happyplaces.database.DatabaseHandler
 import com.krishhh.happyplaces.databinding.ItemHappyPlaceBinding
 import com.krishhh.happyplaces.models.HappyPlaceModel
 
@@ -59,6 +60,17 @@ class HappyPlacesAdapter(
         activity.startActivityForResult(intent, requestCode)
 
         notifyItemChanged(position) // Notify any registered observers that the item at position has changed.
+    }
+
+    // A function to delete the added happy place detail from the local storage.
+    fun removeAt(position: Int) {
+        val dbHandler = DatabaseHandler(context)
+        val isDeleted = dbHandler.deleteHappyPlace(list[position])
+
+        if (isDeleted > 0) {
+            list.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
 

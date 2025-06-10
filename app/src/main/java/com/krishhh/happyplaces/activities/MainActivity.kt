@@ -13,6 +13,7 @@ import com.krishhh.happyplaces.adapters.HappyPlacesAdapter
 import com.krishhh.happyplaces.database.DatabaseHandler
 import com.krishhh.happyplaces.databinding.ActivityMainBinding
 import com.krishhh.happyplaces.models.HappyPlaceModel
+import com.krishhh.happyplaces.utils.SwipeToDeleteCallback
 import com.krishhh.happyplaces.utils.SwipeToEditCallback
 
 class MainActivity : AppCompatActivity() {
@@ -78,6 +79,18 @@ class MainActivity : AppCompatActivity() {
         }
         val editItemTouchHelper = ItemTouchHelper(editSwipeHandler)
         editItemTouchHelper.attachToRecyclerView(binding.rvHappyPlacesList)
+
+        val deleteSwipeHandler = object : SwipeToDeleteCallback(this){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                // Called the adapter function when it is swiped
+                val adapter = binding.rvHappyPlacesList.adapter as HappyPlacesAdapter
+                adapter.removeAt(viewHolder.adapterPosition)
+
+                getHappyPlacesListFromLocalDB()
+            }
+        }
+        val deleteItemTouchHelper = ItemTouchHelper(deleteSwipeHandler)
+        deleteItemTouchHelper.attachToRecyclerView(binding.rvHappyPlacesList)
     }
 
     // It is called when the activity which launched with the request code and expecting a result from the launched activity.)

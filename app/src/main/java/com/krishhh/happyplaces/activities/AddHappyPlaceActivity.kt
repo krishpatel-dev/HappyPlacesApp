@@ -172,15 +172,14 @@ class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
                             if (addHappyPlace > 0) {
                                 setResult(Activity.RESULT_OK)
                                 finish()
-                            } else {
-                                val updateHappyPlace = dbHandler.updateHappyPlace(happyPlaceModel)
-                                if (updateHappyPlace > 0) {
-                                    setResult(Activity.RESULT_OK)
-                                    finish()
-                                }
+                            }
+                        }else {
+                            val updateHappyPlace = dbHandler.updateHappyPlace(happyPlaceModel)
+                            if (updateHappyPlace > 0) {
+                                setResult(Activity.RESULT_OK)
+                                finish()
                             }
                         }
-
                     }
                 }
             }

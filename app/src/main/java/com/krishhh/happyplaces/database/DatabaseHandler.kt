@@ -125,4 +125,18 @@ class DatabaseHandler(context: Context) :
         return happyPlaceList
     }
 
+    // Function to delete happy place details.
+    fun deleteHappyPlace(happyPlace: HappyPlaceModel): Int {
+        val db = this.writableDatabase
+        // Deleting Row
+        val success = db.delete(
+            TABLE_HAPPY_PLACE,
+            KEY_ID + "=" + happyPlace.id,
+            null
+        )
+        //2nd argument is String containing nullColumnHack
+        db.close() // Closing database connection
+        return success
+    }
+
 }
