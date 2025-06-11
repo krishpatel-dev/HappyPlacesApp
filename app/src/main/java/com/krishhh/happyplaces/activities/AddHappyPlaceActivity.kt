@@ -16,7 +16,6 @@ import android.view.View
 import android.widget.Toast
 import android.provider.Settings
 import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -27,6 +26,7 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.krishhh.happyplaces.BuildConfig
 import com.krishhh.happyplaces.R
 import com.krishhh.happyplaces.database.DatabaseHandler
 import com.krishhh.happyplaces.databinding.ActivityAddHappyPlaceBinding
@@ -72,7 +72,7 @@ class AddHappyPlaceActivity : AppCompatActivity(), View.OnClickListener {
         if (!Places.isInitialized()) {
             Places.initialize(
                 this@AddHappyPlaceActivity,
-                resources.getString(R.string.google_maps_api_key)
+                BuildConfig.MAPS_API_KEY
             )
         }
 
